@@ -4,11 +4,35 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
+  {
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: () => import('views/home/Home.vue')
+  },
+  {
+    path: '/rank',
+    name: 'Rank',
+    component: () => import('views/rank/Rank.vue')
+  },
+  {
+    path: '/album',
+    name: 'Album',
+    component: () => import('views/album/Album.vue')
+  },
+  {
+    path: '/singer',
+    name: 'Singer',
+    component: () => import('views/singer/Singer.vue')
+  },
+  {
+    path: '/mv',
+    name: 'Mv',
+    component: () => import('views/mv/Mv.vue')
+  }
   // {
   //   path: '/about',
   //   name: 'About',
