@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <swiper :slideList="slideList"></swiper>
     <recommend-album></recommend-album>
     <recommend-song></recommend-song>

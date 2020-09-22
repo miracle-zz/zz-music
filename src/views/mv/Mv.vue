@@ -1,5 +1,5 @@
 <template>
-  <div class="mv">mv</div>
+  <div class="mv container">mv</div>
 </template>
 
 <script>

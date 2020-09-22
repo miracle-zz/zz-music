@@ -1,10 +1,10 @@
 <template>
-  <div class="singerItem">
+  <div class="singerItem" @click="ToSingerDetail(singerItem.id)">
     <div class="img">
       <el-image :src="singerItem.img1v1Url" lazy></el-image>
     </div>
     <div class="singer">{{singerItem.name}}</div>
-    <div class="number">{{singerItem.musicSize}}</div>
+    <div class="number">单曲数：{{singerItem.musicSize}}</div>
   </div>
 </template>
 
@@ -13,6 +13,13 @@ export default {
   name: 'singerItem',
   props: {
     singerItem: Object
+  },
+  methods: {
+    ToSingerDetail (id) {
+      // this.$router.push('/singerDetail/' + id)
+      this.$router.push({ name: 'singerDetail', params: { id: id } })
+      // this.$router.push({ path: '/singerDetail', query: { id: id } })
+    }
   }
 }
 </script>

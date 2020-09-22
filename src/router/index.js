@@ -29,6 +29,11 @@ const routes = [
     component: () => import('views/singer/Singer.vue')
   },
   {
+    path: '/singerDetail:id',
+    name: 'singerDetail',
+    component: () => import('views/singer/detail/singerDetail.vue')
+  },
+  {
     path: '/mv',
     name: 'Mv',
     component: () => import('views/mv/Mv.vue')

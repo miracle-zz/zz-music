@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <nav-header></nav-header>
-    <div class="container">
-      <keep-alive>
-        <router-view />
-      </keep-alive>
-    </div>
+    <!-- <div class="container"> -->
+    <keep-alive>
+      <router-view />
+    </keep-alive>
+    <!-- </div> -->
     <nav-footer></nav-footer>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
 @import './assets/styles/iconfont.css';
 #app {
   // background: linear-gradient(to bottom right, #f5f3f3, #ffffff);
-  background: #f5f3f3;
+  background: #f7f7f7;
   .nav-header {
     z-index: 999;
   }

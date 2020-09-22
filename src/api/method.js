@@ -51,13 +51,54 @@ export function getSongDetail (id) {
   })
 }
 
-// 获取g歌手
+// 获取热门歌手
 export function getTopSinger () {
   return request({
     url: '/toplist/artist',
     params: {
       offset: 0,
       limit: 30
+    }
+  })
+}
+
+// 获取歌手热门50首歌曲
+export function getSingerTopSong (id, limit) {
+  return request({
+    url: '/artist/top/song',
+    params: {
+      id: id,
+      limit: limit
+    }
+  })
+}
+
+// 获取歌手描述
+export function getSingerDesc (id) {
+  return request({
+    url: '/artist/desc',
+    params: {
+      id: id
+    }
+  })
+}
+
+// 获取歌手详情
+export function getSingerDetail (id) {
+  return request({
+    url: '/artists',
+    params: {
+      id: id
+    }
+  })
+}
+
+// 获取歌手专辑
+export function getSingerAlbum (id) {
+  return request({
+    url: '/artist/album',
+    params: {
+      id: id
     }
   })
 }

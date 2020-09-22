@@ -1,5 +1,5 @@
 <template>
-  <div class="singer">歌手</div>
+  <div class="singer container">歌手</div>
 </template>
 
 <script>
