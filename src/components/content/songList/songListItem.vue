@@ -2,19 +2,19 @@
   <div class="songListItem">
     <div class="left">
       <div class="index">
-        <span>{{utils.formatZero(index + 1, 2)}}</span>
+        <span>{{ utils.formatZero(index + 1, 2) }}</span>
         <i class="iconfont">&#xe60b;</i>
       </div>
       <div class="img">
         <el-image :src="songItem.image" lazy></el-image>
       </div>
       <div class="title">
-        <div class="name">{{songItem.album}}</div>
-        <div class="author">{{songItem.singer}}</div>
+        <div class="name">{{ songItem.album }}</div>
+        <div class="author">{{ songItem.singer }}</div>
       </div>
     </div>
     <div class="center">
-      <span>《{{songItem.name}}》</span>
+      <span>《{{ songItem.name }}》</span>
     </div>
     <div class="right">{{ utils.formatSecondTime(songItem.duration) }}</div>
   </div>
@@ -46,6 +46,18 @@ export default {
   margin-right: 30px;
   margin-bottom: 30px;
   border-radius: 20px;
+  &:hover {
+    .left {
+      .index {
+        span {
+          display: none;
+        }
+        .iconfont {
+          display: block;
+        }
+      }
+    }
+  }
   // border: 2px solid;
   // border-radius: 25px;
   .left {
@@ -62,14 +74,14 @@ export default {
         font-size: 17px;
         color: $colorA;
       }
-      &:hover {
-        span {
-          display: none;
-        }
-        .iconfont {
-          display: block;
-        }
-      }
+      // &:hover {
+      //   span {
+      //     display: none;
+      //   }
+      //   .iconfont {
+      //     display: block;
+      //   }
+      // }
     }
     .img {
       width: 60px;

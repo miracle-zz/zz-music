@@ -37,6 +37,7 @@ export default {
   width: 100%;
   height: 70px;
   display: flex;
+  margin-bottom: 30px;
   // margin-left: 30px;
   // margin-right: 30px;
   align-items: center;

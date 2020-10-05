@@ -5,17 +5,17 @@
         <div class="img">
           <img :src="artist.img" alt />
         </div>
-        <div class="name">{{artist.name}}</div>
+        <div class="name">{{ artist.name }}</div>
         <div class="button">
           <el-button round class="el-button">+ 关注TA</el-button>
         </div>
         <div class="description-box">
-          <div class="description">{{artist.briefDesc}}</div>
+          <div class="description">{{ artist.briefDesc }}</div>
         </div>
         <div class="info">
-          <span>单曲数: {{artist.musicSize}}</span>
-          <span>专辑数: {{artist.albumSize}}</span>
-          <span>MV数: {{artist.mvSize}}</span>
+          <span>单曲数: {{ artist.musicSize }}</span>
+          <span>专辑数: {{ artist.albumSize }}</span>
+          <span>MV数: {{ artist.mvSize }}</span>
         </div>
       </div>
       <div class="bottom-trangle"></div>
@@ -33,7 +33,30 @@
         </el-button>
       </div>
       <div class="content">
-        <music-list :songList="songList"></music-list>
+        <div class="musicList container">
+          <table>
+            <tr>
+              <th>序号</th>
+              <th>歌曲</th>
+              <th>歌手</th>
+              <th>专辑</th>
+              <th>时长</th>
+            </tr>
+            <tr v-for="(item, index) in songList.slice(0, 50)" :key="index">
+              <td>
+                <span>{{ utils.formatZero(index + 1, 2) }}</span>
+                <i class="iconfont">&#xe60b;</i>
+              </td>
+              <td>
+                <el-image :src="item.image" lazy class="img"></el-image>
+                {{ item.name }}
+              </td>
+              <td>{{ item.singer }}</td>
+              <td>{{ item.album }}</td>
+              <td>{{ utils.formatSecondTime(item.duration) }}</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -43,11 +66,11 @@
 import { getSingerTopSong, getSingerDesc, getSingerAlbum, getSingerDetail } from 'api/method'
 import { createSong } from 'model/js/song.js'
 import { createSinger } from 'model/js/singer.js'
-import musicList from 'components/content/musicList/musicList'
+// import musicList from 'components/content/musicList/musicList'
 export default {
   name: 'singerDetail',
   components: {
-    musicList
+    // musicList
   },
   data () {
     return {
@@ -68,10 +91,13 @@ export default {
     getSingerTopSong (id, limit) {
       getSingerTopSong(id, limit).then(res => {
         // console.log(res.data.songs)
-        const songs = res.data.songs
+        // eslint-disable-next-line
+        let songs = res.data.songs
+        const songList1 = []
         songs.forEach((item) => {
-          this.songList.push(createSong(item))
+          songList1.push(createSong(item))
         })
+        this.songList = songList1
       })
     },
     getSingerAlbum (id) {
@@ -94,24 +120,21 @@ export default {
   },
   watch: {
     watch: {
-      // 监听相同路由下参数变化的时候，从而实现异步刷新
-      '$route' (to, from) {
-        // 做一些路由变化的响应
-        // 打开加载动画
-        // this.loading = true;
-        // 重新获取数据
-        // this.initData();
-        /** 初始化其他数据 */
-        const id = this.$route.params.id
-        if (id) {
-          this.getSingerDesc(id)
-          this.getSingerTopSong(id, this.limit)
-          this.getSingerAlbum(id)
-          this.getSingerDetail(id)
-        }
+      $route: {
+        handler (val, oldval) {
+          const id = this.$route.params.id
+          if (id) {
+            this.getSingerDesc(this.$route.params.id)
+            this.getSingerTopSong(this.$route.params.id, this.limit)
+            this.getSingerAlbum(this.$route.params.id)
+            this.getSingerDetail(this.$route.params.id)
+          }
+        },
+        // 深度观察监听
+        deep: true
       }
+
     }
-    // 使用了keep-alive数据会被缓存，所以使用activated钩子函数
   },
   activated () {
     this.getSingerDesc(this.$route.params.id)
@@ -128,7 +151,6 @@ export default {
   background-color: #ffffff;
   .top {
     position: relative;
-
     .introduction {
       text-align: center;
       width: 100%;
@@ -213,6 +235,47 @@ export default {
       .button {
         background-color: $colorA;
         color: #ffffff;
+      }
+    }
+    .musicList {
+      table {
+        width: 100%;
+        border: none;
+        border-collapse: collapse;
+
+        tr {
+          height: 50px;
+          text-align: left;
+          th {
+            font-size: 16px;
+          }
+          td {
+            font-size: 13px;
+            .iconfont {
+              display: none;
+              color: $colorA;
+            }
+            .img {
+              width: 30px;
+              height: 30px;
+              vertical-align: middle;
+            }
+          }
+          &:hover {
+            background-color: #f7f7f7;
+            td {
+              span {
+                display: none;
+              }
+              .iconfont {
+                display: block;
+              }
+            }
+          }
+          &:nth-child(odd) {
+            background-color: #f7f7f7;
+          }
+        }
       }
     }
   }

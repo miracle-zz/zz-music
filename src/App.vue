@@ -3,7 +3,7 @@
     <nav-header></nav-header>
     <!-- <div class="container"> -->
     <keep-alive>
-      <router-view />
+      <router-view exclude="singerDetail"></router-view>
     </keep-alive>
     <!-- </div> -->
     <nav-footer></nav-footer>
